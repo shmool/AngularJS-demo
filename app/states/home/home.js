@@ -26,6 +26,8 @@ export class HomeController {
     $scope.$on('$destroy', () => {
       $interval.cancel(rotateCommands);
     });
+
+    this.myIpAddress = '172.16.254.1';
   }
 
 }
