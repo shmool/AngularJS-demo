@@ -10,7 +10,7 @@ class hexagonController {
   }
 
   getTransform() {
-    return `translate(${this.shapeStyle.x} ${this.shapeStyle.y})scale(${this.shapeStyle.scale})`;
+    return `scale(${this.shapeStyle.scale})`;
   }
 }
 

@@ -42,9 +42,12 @@ export const svgDemo = {
 
       <g ng-include="::svgDemo.logo"></g>
 
-      <hexagon ng-repeat="shape in svgDemo.shapes track by shape.id"
-               shape-style="shape.style"
-               select-shape="svgDemo.onSelect(shape, selected)"></hexagon>
+      <svg ng-repeat="shape in svgDemo.shapes track by shape.id"
+           ng-attr-x="{{shape.style.x}}"
+           ng-attr-y="{{shape.style.y}}">
+        <hexagon shape-style="shape.style"
+                 select-shape="svgDemo.onSelect(shape, selected)"></hexagon>
+      </svg>
     </svg>
   `
 };
