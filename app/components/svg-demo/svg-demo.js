@@ -4,6 +4,12 @@ class svgDemoController {
   // @ngInject
   constructor($sce) {
     this.logo = $sce.trustAsResourceUrl(logo);
+    this.logoShape = {
+      style: {
+        x: 0,
+        y: 0
+      }
+    };
     this.selectedShapes = [];
   }
 
@@ -24,6 +30,11 @@ class svgDemoController {
       });
     }
   }
+
+  toggleSelectLogo() {
+    this.logoShape.selected = !this.logoShape.selected;
+    this.onSelect(this.logoShape, this.logoShape.selected);
+  }
 }
 
 export const svgDemo = {
@@ -40,7 +51,13 @@ export const svgDemo = {
          version="1.1"
          xmlns="http://www.w3.org/2000/svg">
 
-      <g ng-include="::svgDemo.logo"></g>
+      <svg ng-class="{selected: svgDemo.logoShape.selected}"
+           ng-attr-x="{{svgDemo.logoShape.style.x}}"
+           ng-attr-y="{{svgDemo.logoShape.style.y}}">
+        <g ng-include="::svgDemo.logo"
+           ng-attr-transform="scale({{svgDemo.logoShape.style.scale}})"
+           ng-click="svgDemo.toggleSelectLogo()"></g>
+      </svg>
 
       <svg ng-repeat="shape in svgDemo.shapes track by shape.id"
            ng-attr-x="{{shape.style.x}}"
