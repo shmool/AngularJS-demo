@@ -52,6 +52,7 @@ export const svgDemo = {
          xmlns="http://www.w3.org/2000/svg">
 
       <svg ng-class="{selected: svgDemo.logoShape.selected}"
+           movable="svgDemo.logoShape.style"
            ng-attr-x="{{svgDemo.logoShape.style.x}}"
            ng-attr-y="{{svgDemo.logoShape.style.y}}">
         <g ng-include="::svgDemo.logo"
@@ -60,6 +61,7 @@ export const svgDemo = {
       </svg>
 
       <svg ng-repeat="shape in svgDemo.shapes track by shape.id"
+           movable="shape.style"
            ng-attr-x="{{shape.style.x}}"
            ng-attr-y="{{shape.style.y}}">
         <hexagon shape-style="shape.style"
