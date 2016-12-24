@@ -1,6 +1,9 @@
 <h1>Welcome to AngularjsExpertDays!</h1>
 
-
+<shape-style-picker change-style="Home.changeSelectedShapesStyle(style)"
+                defaults="Home.currentStyle"></shape-style-picker>
 <div class="svg-container">
-  <svg-demo></svg-demo>
+  <svg-demo shapes="Home.shapes"
+            select-shape="Home.onSelectShape(shape)"
+            selected-style="Home.selectedStyle"></svg-demo>
 </div>

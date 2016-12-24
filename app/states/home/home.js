@@ -1,31 +1,55 @@
+const shapes = [
+  {
+    id: 1,
+    style: {
+      color: '#663399',
+      scale: 0.5,
+      x: 130,
+      y: 170
+    }
+  },
+  {
+    id: 2,
+    style: {
+      color: '#555555',
+      scale: 0.4,
+      x: 10,
+      y: 10
+    }
+  },
+  {
+    id: 3,
+    style: {
+      color: '#000080',
+      scale: 0.5,
+      x: 140,
+      y: 160
+    }
+  },
+  {
+    id: 4,
+    style: {
+      color: '#ffff00',
+      scale: 0.2,
+      x: 130,
+      y: 170
+    }
+  }
+];
+
 export class HomeController {
 
   // @ngInject
-  constructor($scope, $interval) {
-    const ROTATING_INTERVAL = 2000;
+  constructor() {
+    this.shapes = shapes;
+  }
 
-    const commands = [
-      'state',
-      'model',
-      'service',
-      'directive',
-      'filter',
-      'partial',
-      'config',
-      'stylesheet',
-      'environment'
-    ];
+  onSelectShape(shape) {
+    this.currentStyle = angular.copy(shape.style);
+  }
 
-    this.command = commands[0];
-
-    const rotateCommands = $interval(() => {
-      commands.push(commands.splice(0, 1)[0]);
-      this.command = commands[0];
-    }, ROTATING_INTERVAL);
-
-    $scope.$on('$destroy', () => {
-      $interval.cancel(rotateCommands);
-    });
+  changeSelectedShapesStyle(style) {
+    this.selectedStyle = style;
   }
 
 }

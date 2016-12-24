@@ -58,3 +58,17 @@ footer {
 .svg-container {
   height: 500px;
 }
+
+.selected {
+  stroke: aqua;
+  stroke-width: 10;
+}
+
+.style-picker-item {
+  display: inline-block;
+  padding-right: 10px;
+
+  input {
+    width: 50px;
+  }
+}
