@@ -1,4 +1,5 @@
 import logo from 'assets/images/AngularJS_logo.svg';
+import find from 'lodash/find';
 
 class svgDemoController {
   // @ngInject
@@ -11,6 +12,10 @@ class svgDemoController {
       }
     };
     this.selectedShapes = [];
+  }
+
+  $onInit() {
+    this._attachLinks();
   }
 
   onSelect(shape, selected) {
@@ -28,6 +33,8 @@ class svgDemoController {
       this.selectedShapes.forEach((shape) => {
         Object.assign(shape.style, this.selectedStyle);
       });
+    } else if (changes.links) {
+      this._attachLinks();
     }
   }
 
@@ -35,11 +42,22 @@ class svgDemoController {
     this.logoShape.selected = !this.logoShape.selected;
     this.onSelect(this.logoShape, this.logoShape.selected);
   }
+
+  _attachLinks() {
+    this.connectedLinks = this.links.map((link) => {
+      return {
+        id: link.id,
+        from: find(this.shapes, {id: link.from}),
+        to: find(this.shapes, {id: link.to}),
+      };
+    });
+  }
 }
 
 export const svgDemo = {
   bindings: {
     shapes: '<',
+    links: '<',
     selectShape: '&',
     selectedStyle: '<'
   },
@@ -59,6 +77,13 @@ export const svgDemo = {
            ng-attr-transform="scale({{svgDemo.logoShape.style.scale}})"
            ng-click="svgDemo.toggleSelectLogo()"></g>
       </svg>
+
+      <line ng-repeat="link in svgDemo.connectedLinks track by link.id"
+            ng-attr-x1="{{ link.from.style.x + 75 }}"
+            ng-attr-y1="{{ link.from.style.y + 65 }}"
+            ng-attr-x2="{{ link.to.style.x + 75 }}"
+            ng-attr-y2="{{ link.to.style.y + 65 }}"
+            class="svg-link"></line>
 
       <svg ng-repeat="shape in svgDemo.shapes track by shape.id"
            movable="shape.style"

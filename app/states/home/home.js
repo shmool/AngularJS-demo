@@ -37,11 +37,30 @@ const shapes = [
   }
 ];
 
+const links = [
+  {
+    id: 1,
+    from: 1,
+    to: 2
+  },
+  {
+    id: 2,
+    from: 1,
+    to: 3
+  },
+  {
+    id: 3,
+    from: 2,
+    to: 4
+  },
+];
+
 export class HomeController {
 
   // @ngInject
   constructor() {
     this.shapes = shapes;
+    this.links = links;
   }
 
   onSelectShape(shape) {
